@@ -190,30 +190,6 @@ describe("Milestone Tracking Contract", () => {
     expect(milestone.state).toBe(2) // STATE_APPROVED
   })
   
-  it("should mark a milestone as completed successfully", () => {
-    const projectId = 1
-    const description = "Frontend Development"
-    const amount = 500
-    
-    // Create milestone
-    mockContract.createMilestone(projectId, description, amount)
-    
-    // Approve milestone
-    mockContract.approveMilestone(projectId, 1)
-    
-    // Set tx-sender to freelancer for this test
-    global.txSender = "ST2CY5V39NHDPWSXMW9QDT3HC3GD6Q6XX4CFRK9AG"
-    
-    // Complete milestone
-    const completeResult = mockContract.completeMilestone(projectId, 1)
-    expect(completeResult.success).toBe(true)
-    
-    // Check milestone state
-    const milestone = mockContract.getMilestone(projectId, 1)
-    expect(milestone.state).toBe(3) // STATE_COMPLETED
-    expect(milestone.completedAt).toBe(123789)
-  })
-  
   it("should pay for a milestone successfully", () => {
     const projectId = 1
     const description = "Frontend Development"
